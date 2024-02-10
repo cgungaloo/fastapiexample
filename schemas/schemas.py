@@ -1,4 +1,16 @@
 from pydantic import BaseModel
+from jose import JWTError, jwts
+from passlib.context import CryptContext
+
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class TokenData(BaseModel):
+    username: str | None = None
 
 
 class ItemBase(BaseModel):
@@ -33,3 +45,6 @@ class User(UserBase):
 
     class Config:
         orm_mode = True
+
+class UserInDB(User):
+    hashed_password: str

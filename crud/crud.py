@@ -3,6 +3,15 @@ from sqlalchemy.orm import Session
 
 from models.models import User, Item
 from schemas.schemas import UserCreate, ItemCreate
+from security.verify import verify_password
+
+def authenticate_user(db: Session, user_email: str, password: str):
+    user = get_user_by_email(db, user_email)
+    if not user:
+        return False
+    if not verify_password(password, user.hashed_password):
+        return False
+    return User
 
 def get_user(db: Session, user_id: int):
     return db.query(User).filter(User.id == user_id).first()

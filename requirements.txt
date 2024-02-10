@@ -3,3 +3,7 @@ uvicorn
 sqlalchemy
 Jinja2
 alembic
+python-jose 
+cryptography
+passlib 
+bcrypt 
